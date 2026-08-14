@@ -47,7 +47,7 @@ export default function Home() {
     <main>
       <nav className="nav shell" aria-label="Navegación principal">
         <a className="brand" href="#inicio" aria-label="Last Call, inicio">
-          <img src="/lastcall-logo.png" alt="Last Call" />
+          <img src="lastcall-logo.png" alt="Last Call" />
         </a>
         <div className="navLinks">
           <a href="#programa">Programa</a>
@@ -62,7 +62,7 @@ export default function Home() {
         <div className="shell heroGrid">
           <div className="heroCopy">
             <div className="partnerLine">
-              <img src="/microsoft-logo.png" alt="Microsoft" />
+              <img src="microsoft-logo.png" alt="Microsoft" />
               <span />
               <strong>Septiembre 2026</strong>
             </div>
@@ -196,7 +196,7 @@ export default function Home() {
       <section className="registration section" id="registro">
         <div className="shell registrationGrid">
           <div className="registrationIntro">
-            <img src="/lastcall-logo.png" alt="Last Call" />
+            <img src="lastcall-logo.png" alt="Last Call" />
             <p className="eyebrow">Cupos de septiembre</p>
             <h2>Haz de estos 30 días el punto de partida.</h2>
             <p>Completa el formulario y nuestro equipo validará la elegibilidad, los usuarios y el caso de uso con mayor impacto para tu organización.</p>
@@ -228,7 +228,7 @@ export default function Home() {
 
       <footer>
         <div className="shell footerTop">
-          <img src="/lastcall-logo.png" alt="Last Call" />
+          <img src="lastcall-logo.png" alt="Last Call" />
           <p>Tecnología que deja huella.<br />Chile · Perú</p>
           <a href="#inicio">Volver arriba ↑</a>
         </div>
