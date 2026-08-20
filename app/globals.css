@@ -9,11 +9,12 @@
   --paper: #f8f8f4;
   --line: #d9d9d2;
   --muted: #667085;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans); }
 a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
 .shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }

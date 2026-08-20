@@ -60,7 +60,7 @@ export default function Home() {
               "@type": "VirtualLocation",
               "url": `${SITE_URL}/`
             },
-            "image": [`${SITE_URL}/og.png`],
+            "image": [`${SITE_URL}/og-optimized.png`],
             "offers": {
               "@type": "Offer",
               "url": `${SITE_URL}/#registro`,
@@ -81,9 +81,12 @@ export default function Home() {
         }}
       />
       <meta property="og:url" content={SITE_URL} />
-      <meta property="og:image" content={`${SITE_URL}/og.png`} />
+      <meta property="og:image" content={`${SITE_URL}/og-optimized.png`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
       <meta name="twitter:url" content={SITE_URL} />
-      <meta name="twitter:image" content={`${SITE_URL}/og.png`} />
+      <meta name="twitter:image" content={`${SITE_URL}/og-optimized.png`} />
       <link rel="canonical" href={SITE_URL} />
       <nav className="nav shell" aria-label="Navegación principal">
         <a className="brand" href="#inicio" aria-label="Last Call, inicio">

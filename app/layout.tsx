@@ -29,13 +29,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      images: [{ url: `${baseUrl}/og.png`, width: 1730, height: 909, alt: "Copilot en 30, septiembre 2026" }],
+      images: [{ url: `${baseUrl}/og-optimized.png`, width: 1200, height: 630, alt: "Programa de adopción Copilot 30 días | Last Call + Microsoft" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`${baseUrl}/og.png`],
+      images: [`${baseUrl}/og-optimized.png`],
     },
   };
 }
