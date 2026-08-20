@@ -1,5 +1,7 @@
 import RegistrationForm from "./RegistrationForm";
 
+const SITE_URL = "https://lastcall-event.vercel.app";
+
 const sessions = [
   {
     date: "08 SEP",
@@ -45,6 +47,49 @@ const outcomes = [
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            "name": "Copilot en 30 días | Last Call + Microsoft",
+            "description": "Prueba Microsoft 365 Copilot Business durante 30 días con cuatro sesiones y acompañamiento experto de Last Call.",
+            "startDate": "2026-09-08",
+            "endDate": "2026-09-29",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+            "location": {
+              "@type": "VirtualLocation",
+              "url": `${SITE_URL}/`
+            },
+            "image": [
+              `${SITE_URL}/og.png`
+            ],
+            "offers": {
+              "@type": "Offer",
+              "url": `${SITE_URL}/#registro`,
+              "price": "0",
+              "priceCurrency": "CLP",
+              "availability": "https://schema.org/InStock"
+            },
+            "organizer": {
+              "@type": "Organization",
+              "name": "Last Call",
+              "url": SITE_URL
+            },
+            "performer": {
+              "@type": "Organization",
+              "name": "Microsoft"
+            }
+          })
+        }}
+      />
+      <meta property="og:url" content={SITE_URL} />
+      <meta property="og:image" content={`${SITE_URL}/og.png`} />
+      <meta name="twitter:url" content={SITE_URL} />
+      <meta name="twitter:image" content={`${SITE_URL}/og.png`} />
+      <link rel="canonical" href={SITE_URL} />
       <nav className="nav shell" aria-label="Navegación principal">
         <a className="brand" href="#inicio" aria-label="Last Call, inicio">
           <img src="lastcall-logo.png" alt="Last Call" />
@@ -63,7 +108,7 @@ export default function Home() {
           <div className="heroCopy">
             <div className="partnerLine">
               <img src="microsoft-logo.png" alt="Microsoft" />
-              <span />
+              <span aria-hidden="true" className="divider" />
               <strong>Septiembre 2026</strong>
             </div>
             <p className="eyebrow">Last Call presenta · experiencia guiada</p>
@@ -184,7 +229,7 @@ export default function Home() {
             <p className="eligibilityLead">La postulación está pensada para organizaciones que quieran experimentar, medir y decidir en 30 días.</p>
           </div>
           <ul className="checkList">
-            <li><i>✓</i><span><strong>Hasta 300 colaboradores</strong> y un grupo piloto de máximo 25 usuarios.</span></li>
+            <li><i>✓</i><span><strong>30 a 300+ colaboradores</strong> y un grupo piloto de máximo 25 usuarios.</span></li>
             <li><i>✓</i><span><strong>Microsoft 365 activo y compatible</strong> o disposición para evaluar la preparación técnica.</span></li>
             <li><i>✓</i><span><strong>Sin licencias pagadas de Copilot</strong> en los usuarios que participarán del trial.</span></li>
             <li><i>✓</i><span><strong>Un sponsor interno</strong> y compromiso de participar en las cuatro sesiones.</span></li>
