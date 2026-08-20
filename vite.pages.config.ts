@@ -7,7 +7,7 @@ const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: path.resolve(projectRoot, "pages"),
-  base: "/lastcall/",
+  base: "/",
   publicDir: path.resolve(projectRoot, "public"),
   plugins: [react()],
   build: {
