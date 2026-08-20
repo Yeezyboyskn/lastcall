@@ -132,16 +132,14 @@ h2 em { color:#848d19; font-style:normal; }
 .sessionsIntro h2 { font-size:clamp(38px,4vw,58px); }
 .sessionsIntro p { color:var(--muted); line-height:1.6; margin:0; }
 .sessionList { border-top:1px solid #c9c9c1; }
-.sessionCard { display:grid; grid-template-columns:110px 130px 1fr 220px; align-items:center; gap:25px; padding:24px 14px; border-bottom:1px solid #c9c9c1; transition:padding .2s, background .2s; }
-.sessionCard:hover { background:#fff; padding-left:26px; padding-right:26px; }
-.sessionDate { width:78px; height:78px; display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--ink); color:white; border-radius:50%; }
-.sessionDate strong { font-size:28px; line-height:.9; }
-.sessionDate span { margin-top:6px; color:var(--acid); font-size:12px; font-weight:900; letter-spacing:.12em; }
-.sessionWeek { color:#777f8b; font-size:11px; font-weight:900; letter-spacing:.16em; }
-.sessionContent p { margin:0 0 6px; color:#747b1b; font-size:12px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
-.sessionContent h3 { margin:0 0 9px; font-size:26px; letter-spacing:-.03em; }
-.sessionContent > span { display:block; max-width:600px; color:#5e6674; line-height:1.45; }
-.sessionTools { color:#4d5563; font-size:13px; font-weight:700; text-align:right; }
+.sessionCard { display:grid; grid-template-columns:100px minmax(0, 1fr) 220px; align-items:center; gap:32px; padding:28px 24px; border-bottom:1px solid #c9c9c1; transition:background .2s; }
+.sessionCard:hover { background:#fff; }
+.sessionPeriod { font-weight:900; color:var(--ink); font-size:14px; letter-spacing:.08em; }
+.sessionContent { display:grid; grid-template-columns:minmax(200px, .6fr) minmax(280px, 1.4fr); gap:24px; align-items:start; min-width:0; }
+.sessionContent p { margin:0 0 8px; color:var(--acid); font-size:12px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+.sessionContent h3 { margin:0 0 10px; font-size:26px; line-height:1.15; letter-spacing:-.03em; }
+.sessionContent > span { display:block; color:#5e6674; line-height:1.55; }
+.sessionTools { color:#4d5563; font-size:13px; font-weight:700; text-align:right; white-space:nowrap; }
 
 .difference { position:relative; overflow:hidden; background:var(--night-2); color:white; }
 .difference::before { content:""; position:absolute; inset:auto -20% -350px 42%; height:700px; border:1px solid rgba(243,234,53,.25); border-radius:50%; transform:rotate(-18deg); }
@@ -232,8 +230,9 @@ footer { background:var(--night); color:white; padding:68px 0 25px; }
   .outcomeGrid { grid-template-columns:1fr 1fr; }
   .sessionsIntro { grid-template-columns:1fr 1.3fr; }
   .sessionsIntro > p { grid-column:2; }
-  .sessionCard { grid-template-columns:90px 100px 1fr; }
-  .sessionTools { grid-column:3; text-align:left; }
+  .sessionCard { grid-template-columns:90px 1fr; gap:20px; }
+  .sessionContent { grid-template-columns:1fr; }
+  .sessionTools { text-align:left; margin-top:12px; }
   .differenceList > div { grid-template-columns:45px 1fr; }
   .differenceList p { grid-column:2; }
 }
@@ -254,13 +253,10 @@ footer { background:var(--night); color:white; padding:68px 0 25px; }
   .sectionHeading .sectionLabel { margin-bottom:10px; }
   .outcomeGrid { grid-template-columns:1fr; }
   .sessionsIntro > p { grid-column:auto; }
-  .sessionCard { grid-template-columns:78px 1fr; gap:18px; padding-inline:0; }
-  .sessionCard:hover { padding-inline:10px; }
-  .sessionWeek { grid-column:2; grid-row:1; align-self:start; margin-top:4px; }
-  .sessionContent { grid-column:2; }
-  .sessionTools { grid-column:2; }
-  .sessionDate { grid-row:1 / span 3; width:68px; height:68px; }
-  .sessionDate strong { font-size:24px; }
+  .sessionCard { grid-template-columns:1fr; gap:16px; padding:20px 16px; }
+  .sessionContent { grid-template-columns:1fr; gap:16px; }
+  .sessionTools { text-align:left; margin-top:8px; }
+  .sessionDate { display:none; }
   .differenceList > div { grid-template-columns:38px 1fr; }
   .eligibilityNote { flex-direction:column; }
   .registration { padding-bottom:100px; }
