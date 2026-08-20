@@ -157,6 +157,9 @@ h2 em { color:#848d19; font-style:normal; }
 .formSubmit span { color:var(--acid); font-size:20px; }
 .formSubmit:hover { background:#252c39; }
 .formNote { margin: -7px 0 0; color:#878e99; font-size:11px; text-align:center; }
+.errorMsg { color:#c0392b; font-size:11px; font-weight:700; margin-top:4px; }
+.registrationForm input[aria-invalid="true"], .registrationForm select[aria-invalid="true"] { border-color:#c0392b; }
+.registrationForm input[aria-invalid="true"]:focus, .registrationForm select[aria-invalid="true"]:focus { box-shadow:0 0 0 3px rgba(192,57,43,.25); border-color:#c0392b; }
 .formSuccess { min-height:565px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:50px; }
 .formSuccess > span { display:grid; place-items:center; width:58px; height:58px; margin-bottom:35px; border-radius:50%; background:var(--acid); font-size:24px; font-weight:900; }
 .formSuccess .eyebrow { color:#747b1b; }
