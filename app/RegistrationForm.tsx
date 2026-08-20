@@ -42,7 +42,7 @@ export default function RegistrationForm() {
     const newErrors: FormErrors = {};
 
     if (!data.name.trim()) {
-      newErrors.name = "Nombre y apellido es obligatorio";
+      newErrors.name = "Nombre y apellido son obligatorios";
     } else if (data.name.trim().length < 3) {
       newErrors.name = "Ingresa tu nombre completo";
     }
@@ -55,8 +55,6 @@ export default function RegistrationForm() {
       newErrors.email = "Correo corporativo es obligatorio";
     } else if (!EMAIL_REGEX.test(data.email)) {
       newErrors.email = "Ingresa un correo válido (ej. nombre@empresa.com)";
-    } else if (!data.email.includes("@")) {
-      newErrors.email = "Debe ser un correo corporativo";
     }
 
     if (!data.phone.trim()) {
@@ -78,11 +76,11 @@ export default function RegistrationForm() {
     }
 
     if (!data.consent) {
-      newErrors.consent = "Debes aceptar ser contactado por Last Call";
+      newErrors.consent = "Debes autorizar el contacto de Last Call";
     }
 
     if (!data.twentyFiveUsers) {
-      newErrors.twentyFiveUsers = "Debes confirmar que participarán 25 usuarios";
+      newErrors.twentyFiveUsers = "Confirma que participan hasta 25 usuarios";
     }
 
     if (!data.dataProcessing) {
@@ -141,14 +139,25 @@ export default function RegistrationForm() {
   if (sent) {
     return (
       <div className="formSuccess" role="status" aria-live="polite">
-        <span>✓</span>
-        <p className="eyebrow">Registro demo completado</p>
-        <h3>Tu equipo ya dio el primer paso.</h3>
+        <span aria-hidden="true">✓</span>
+        <p className="eyebrow">Postulación enviada</p>
+        <h3>Tu organización ya dio el primer paso.</h3>
         <p>
-          En la versión final, Last Call recibirá estos datos para validar la
-          elegibilidad y coordinar el kickoff de septiembre.
+          Nuestro equipo revisará la elegibilidad, validará los perfiles
+          y se pondrá en contacto para coordinar el kickoff del programa.
         </p>
-        <button type="button" onClick={() => { setSent(false); setFormData({ name: "", role: "", email: "", phone: "", company: "", country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false }); }}>Registrar otra empresa</button>
+        <button
+          type="button"
+          onClick={() => {
+            setSent(false);
+            setFormData({
+              name: "", role: "", email: "", phone: "", company: "",
+              country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
+            });
+          }}
+        >
+          Nueva postulación
+        </button>
       </div>
     );
   }
@@ -293,7 +302,7 @@ export default function RegistrationForm() {
           aria-invalid={!!errors.twentyFiveUsers}
           aria-describedby={errors.twentyFiveUsers ? "twentyFiveUsers-error" : undefined}
         />
-        <span>Estoy consciente de que deben participar 25 usuarios de mi empresa en el trial de 30 días.</span>
+        <span>Confirmo que mi organización destinará hasta 25 usuarios para el programa de 30 días.</span>
         {errors.twentyFiveUsers && <span id="twentyFiveUsers-error" className="errorMsg" role="alert">{errors.twentyFiveUsers}</span>}
       </label>
       <label className="checkField">
@@ -306,14 +315,14 @@ export default function RegistrationForm() {
           aria-invalid={!!errors.dataProcessing}
           aria-describedby={errors.dataProcessing ? "dataProcessing-error" : undefined}
         />
-        <span>Autorizo el tratamiento de mis datos personales para fines de esta postulación según la política de privacidad.</span>
+        <span>Autorizo el tratamiento de mis datos personales según la política de privacidad de Last Call.</span>
         {errors.dataProcessing && <span id="dataProcessing-error" className="errorMsg" role="alert">{errors.dataProcessing}</span>}
       </label>
       {submitError && <div className="errorMsg" role="alert" style={{ gridColumn: "1 / -1", textAlign: "center" }}>{submitError}</div>}
       <button className="formSubmit" type="submit" disabled={submitting}>
-        {submitting ? "Enviando..." : "Quiero postular al trial <span>↗</span>"}
+        {submitting ? "Enviando postulación…" : "Enviar postulación"}
       </button>
-      <p className="formNote">Los datos se envían a Last Call vía Microsoft Power Automate.</p>
+      <p className="formNote">La información se gestiona mediante Microsoft Power Automate bajo estricta confidencialidad.</p>
     </form>
   );
 }

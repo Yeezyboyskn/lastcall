@@ -153,9 +153,9 @@ h2 em { color:#848d19; font-style:normal; }
 .registrationForm input:focus, .registrationForm select:focus { border-color:#879019; box-shadow:0 0 0 3px rgba(243,234,53,.45); }
 .checkField { grid-template-columns:18px 1fr !important; align-items:start; gap:10px !important; color:#5f6673 !important; line-height:1.4; font-weight:normal !important; }
 .checkField input { margin-top:2px; accent-color:var(--ink); }
-.formSubmit { display:flex; align-items:center; justify-content:space-between; min-height:56px; padding:0 20px; border:0; background:var(--ink); color:white; font-weight:900; cursor:pointer; }
-.formSubmit span { color:var(--acid); font-size:20px; }
-.formSubmit:hover { background:#252c39; }
+.formSubmit { display:flex; align-items:center; justify-content:center; min-height:56px; padding:0 20px; border:0; background:var(--ink); color:white; font-weight:900; cursor:pointer; gap:8px; }
+.formSubmit:hover:not(:disabled) { background:#252c39; }
+.formSubmit:disabled { opacity:0.7; cursor:not-allowed; }
 .formNote { margin: -7px 0 0; color:#878e99; font-size:11px; text-align:center; }
 .errorMsg { color:#c0392b; font-size:11px; font-weight:700; margin-top:4px; }
 .registrationForm input[aria-invalid="true"], .registrationForm select[aria-invalid="true"] { border-color:#c0392b; }
