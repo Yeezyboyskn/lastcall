@@ -1,4 +1,5 @@
 import RegistrationForm from "./RegistrationForm";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const SITE_URL = "https://lastcall-event.vercel.app";
 
@@ -245,7 +246,9 @@ export default function Home() {
           </div>
           <div className="formPanel">
             <div className="formHeader"><span>POSTULACIÓN</span><strong>Q4 2026</strong></div>
-            <RegistrationForm />
+            <ErrorBoundary>
+              <RegistrationForm />
+            </ErrorBoundary>
           </div>
         </div>
       </section>

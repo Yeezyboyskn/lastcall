@@ -318,6 +318,7 @@ export default function RegistrationForm() {
         <span>Autorizo el tratamiento de mis datos personales según la política de privacidad de Last Call.</span>
         {errors.dataProcessing && <span id="dataProcessing-error" className="errorMsg" role="alert">{errors.dataProcessing}</span>}
       </label>
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
       {submitError && <div className="errorMsg" role="alert" style={{ gridColumn: "1 / -1", textAlign: "center" }}>{submitError}</div>}
       <button className="formSubmit" type="submit" disabled={submitting}>
         {submitting ? "Enviando postulación…" : "Enviar postulación"}

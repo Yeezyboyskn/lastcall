@@ -1,0 +1,21 @@
+{
+  "name": "Programa de adopción Copilot 30 días",
+  "short_name": "Copilot 30 días",
+  "description": "Prueba Microsoft 365 Copilot Business sin costo durante 30 días con acompañamiento experto de Last Call.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f8f4",
+  "theme_color": "#101522",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "lastcall-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "es",
+  "dir": "ltr"
+}

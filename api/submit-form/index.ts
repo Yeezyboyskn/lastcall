@@ -1,55 +1,63 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { Redis } from "@upstash/redis";
+import { z } from "zod";
 
 const POWER_AUTOMATE_WEBHOOK = process.env.POWER_AUTOMATE_WEBHOOK_URL;
+
+const UPSTASH_REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL;
+const UPSTASH_REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+const redis = UPSTASH_REDIS_REST_URL && UPSTASH_REDIS_REST_TOKEN
+  ? new Redis({ url: UPSTASH_REDIS_REST_URL, token: UPSTASH_REDIS_REST_TOKEN })
+  : null;
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 10;
 
-interface RateLimitEntry {
-  count: number;
-  resetTime: number;
-}
-
-const rateLimitStore = new Map<string, RateLimitEntry>();
-
-function cleanupRateLimitStore() {
-  const now = Date.now();
-  for (const [key, entry] of rateLimitStore.entries()) {
-    if (entry.resetTime < now) {
-      rateLimitStore.delete(key);
-    }
-  }
-}
+const FormSchema = z.object({
+  name: z.string().min(3, "Nombre muy corto"),
+  role: z.string().min(2, "Cargo requerido"),
+  email: z.string().email("Correo inválido"),
+  phone: z.string().regex(/^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{4,6}$/, "Teléfono inválido"),
+  company: z.string().min(2, "Empresa requerida"),
+  country: z.enum(["Chile", "Perú", "Otro país de LATAM"]),
+  companySize: z.enum(["30 a 49 colaboradores", "50 a 99 colaboradores", "100 a 299 colaboradores", "300 o más colaboradores"]),
+  consent: z.boolean().refine((v) => v === true, "Debes autorizar el contacto"),
+  twentyFiveUsers: z.boolean().refine((v) => v === true, "Confirma participación de usuarios"),
+  dataProcessing: z.boolean().refine((v) => v === true, "Debes autorizar tratamiento de datos"),
+  _honey: z.string().optional(),
+});
 
 function getClientIp(request: VercelRequest): string {
   const forwarded = request.headers["x-forwarded-for"];
   if (forwarded) {
     return (Array.isArray(forwarded) ? forwarded[0] : forwarded.split(",")[0]).trim();
   }
-  return request.headers["x-real-ip"] as string || "unknown";
+  return (request.headers["x-real-ip"] as string) || "unknown";
 }
 
-function checkRateLimit(ip: string): { allowed: boolean; remaining: number; resetTime: number } {
-  cleanupRateLimitStore();
+async function checkRateLimit(ip: string): Promise<{ allowed: boolean; remaining: number; resetTime: number }> {
+  if (!redis) {
+    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS, resetTime: Date.now() + RATE_LIMIT_WINDOW_MS };
+  }
 
+  const key = `ratelimit:${ip}`;
   const now = Date.now();
-  const entry = rateLimitStore.get(ip);
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
 
-  if (!entry || entry.resetTime < now) {
-    const newEntry: RateLimitEntry = {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW_MS,
-    };
-    rateLimitStore.set(ip, newEntry);
-    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - 1, resetTime: newEntry.resetTime };
+  await redis.zremrangebyscore(key, 0, windowStart);
+  await redis.zadd(key, { score: now, member: `${now}:${Math.random()}` });
+  await redis.expire(key, Math.ceil(RATE_LIMIT_WINDOW_MS / 1000));
+
+  const currentCount = await redis.zcard(key);
+
+  if (currentCount > RATE_LIMIT_MAX_REQUESTS) {
+    const oldest = await redis.zrange(key, 0, 0, { withScores: true });
+    const resetTime = oldest.length > 0 ? Number((oldest[0] as { score: number }).score) + RATE_LIMIT_WINDOW_MS : now + RATE_LIMIT_WINDOW_MS;
+    return { allowed: false, remaining: 0, resetTime };
   }
 
-  if (entry.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return { allowed: false, remaining: 0, resetTime: entry.resetTime };
-  }
-
-  entry.count++;
-  return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - entry.count, resetTime: entry.resetTime };
+  return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - currentCount, resetTime: now + RATE_LIMIT_WINDOW_MS };
 }
 
 export default async function handler(
@@ -65,7 +73,7 @@ export default async function handler(
   }
 
   const clientIp = getClientIp(request);
-  const rateLimit = checkRateLimit(clientIp);
+  const rateLimit = await checkRateLimit(clientIp);
 
   response.setHeader("X-RateLimit-Limit", RATE_LIMIT_MAX_REQUESTS.toString());
   response.setHeader("X-RateLimit-Remaining", rateLimit.remaining.toString());
@@ -81,27 +89,23 @@ export default async function handler(
   }
 
   try {
-    const body = request.body;
+    const body = request.body as Record<string, unknown>;
 
-    const requiredFields = [
-      "name", "role", "email", "phone", "company",
-      "country", "companySize", "consent", "twentyFiveUsers", "dataProcessing"
-    ];
-
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return response.status(400).json({ error: `Campo requerido faltante: ${field}` });
-      }
+    if (body._honey && typeof body._honey === "string" && body._honey.length > 0) {
+      return response.status(200).json({ success: true });
     }
 
-    if (typeof body.consent !== "boolean" || typeof body.twentyFiveUsers !== "boolean" || typeof body.dataProcessing !== "boolean") {
-      return response.status(400).json({ error: "Los campos de consentimiento deben ser booleanos" });
+    const parsed = FormSchema.safeParse(body);
+
+    if (!parsed.success) {
+      const firstError = parsed.error.issues[0];
+      return response.status(400).json({ error: firstError.message });
     }
 
     const webhookResponse = await fetch(POWER_AUTOMATE_WEBHOOK, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify(parsed.data),
     });
 
     if (!webhookResponse.ok) {

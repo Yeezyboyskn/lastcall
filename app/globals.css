@@ -19,6 +19,34 @@ button, input, select { font: inherit; }
 .shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
 .section { padding-block: 118px; }
 
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: var(--ink);
+  color: white;
+  font-weight: 700;
+  border-radius: 0 0 8px 8px;
+  z-index: 10000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--acid);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--acid);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .nav { height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .brand img { display: block; width: 190px; height: auto; }
 .navLinks { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 700; }
@@ -166,6 +194,11 @@ h2 em { color:#848d19; font-style:normal; }
 .formSuccess h3 { margin:0 0 16px; font-size:37px; line-height:1.05; }
 .formSuccess > p:not(.eyebrow) { color:#626a76; line-height:1.6; }
 .formSuccess button { margin-top:25px; border:0; border-bottom:2px solid var(--ink); background:transparent; padding:4px 0; font-weight:800; cursor:pointer; }
+
+.formError { min-height:565px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:50px; color:#c0392b; text-align:left; }
+.formError p { margin:0 0 16px; font-size:18px; }
+.formError button { margin-top:16px; padding:12px 24px; background:var(--ink); color:white; font-weight:700; border:0; border-radius:4px; cursor:pointer; }
+.formError button:hover { background:#252c39; }
 
 .faqGrid { display:grid; grid-template-columns:.65fr 1.35fr; gap:120px; }
 .faqGrid h2 { font-size:50px; }
