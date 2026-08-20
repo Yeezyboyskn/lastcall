@@ -1,8 +1,6 @@
 import RegistrationForm from "./RegistrationForm";
 import { ErrorBoundary } from "./ErrorBoundary";
 
-const SITE_URL = "https://lastcall-event.vercel.app";
-
 const sessions = [
   {
     period: "Semana 1",
@@ -43,51 +41,7 @@ const outcomes = [
 
 export default function Home() {
   return (
-    <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Event",
-            "name": "Programa de adopción Copilot 30 días | Last Call + Microsoft",
-            "description": "Prueba Microsoft 365 Copilot Business sin costo durante 30 días con acompañamiento experto de Last Call. Cuatro sesiones en vivo, talleres por perfil y medición de resultados reales.",
-            "startDate": "2026-10-01",
-            "endDate": "2026-12-31",
-            "eventStatus": "https://schema.org/EventScheduled",
-            "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-            "location": {
-              "@type": "VirtualLocation",
-              "url": `${SITE_URL}/`
-            },
-            "image": [`${SITE_URL}/og-optimized.png`],
-            "offers": {
-              "@type": "Offer",
-              "url": `${SITE_URL}/#registro`,
-              "price": "0",
-              "priceCurrency": "CLP",
-              "availability": "https://schema.org/InStock"
-            },
-            "organizer": {
-              "@type": "Organization",
-              "name": "Last Call",
-              "url": SITE_URL
-            },
-            "performer": {
-              "@type": "Organization",
-              "name": "Microsoft"
-            }
-          })
-        }}
-      />
-      <meta property="og:url" content={SITE_URL} />
-      <meta property="og:image" content={`${SITE_URL}/og-optimized.png`} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:type" content="image/png" />
-      <meta name="twitter:url" content={SITE_URL} />
-      <meta name="twitter:image" content={`${SITE_URL}/og-optimized.png`} />
-      <link rel="canonical" href={SITE_URL} />
+    <main id="contenido-principal">
       <nav className="nav shell" aria-label="Navegación principal">
         <a className="brand" href="#inicio" aria-label="Last Call, inicio">
           <img src="lastcall-logo.png" alt="Last Call" />
@@ -249,6 +203,24 @@ export default function Home() {
           </div>
           <div className="formPanel">
             <div className="formHeader"><span>POSTULACIÓN</span><strong>Q4 2026</strong></div>
+            <div className="trustSignals" aria-label="Señales de confianza">
+              <div className="trustItem">
+                <span className="trustIcon" aria-hidden="true">🔒</span>
+                <span>Seguridad y privacidad garantizadas</span>
+              </div>
+              <div className="trustItem">
+                <span className="trustIcon" aria-hidden="true">📋</span>
+                <span>Hasta 25 usuarios sin costo</span>
+              </div>
+              <div className="trustItem">
+                <span className="trustIcon" aria-hidden="true">🤝</span>
+                <span>4 sesiones guiadas por expertos</span>
+              </div>
+              <div className="trustItem">
+                <span className="trustIcon" aria-hidden="true">✅</span>
+                <span>Sujeto a elegibilidad CSP</span>
+              </div>
+            </div>
             <ErrorBoundary>
               <RegistrationForm />
             </ErrorBoundary>
@@ -273,10 +245,10 @@ export default function Home() {
         <div className="shell footerTop">
           <img src="lastcall-logo.png" alt="Last Call" />
           <p>Tecnología que deja huella.<br />Chile · Perú</p>
-          <a href="#inicio">Volver arriba</a>
+          <a href="https://lastcall.cl" target="_blank" rel="noopener noreferrer">Sitio corporativo</a>
         </div>
         <div className="shell footerBottom">
-          <span>© 2026 Last Call. Campaña conceptual.</span>
+          <span>© 2026 Last Call. Todos los derechos reservados.</span>
           <span>Microsoft y Microsoft 365 Copilot son marcas de Microsoft Corporation.</span>
         </div>
       </footer>

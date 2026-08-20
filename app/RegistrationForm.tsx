@@ -13,12 +13,23 @@ type FormData = {
   consent: boolean;
   twentyFiveUsers: boolean;
   dataProcessing: boolean;
+  _honey: string;
 };
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_REGEX = /^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{4,6}$/;
+
+function normalizePhone(phone: string): string {
+  return phone.replace(/[\s().-]/g, "");
+}
+
+function isValidPhone(phone: string): boolean {
+  const normalized = normalizePhone(phone);
+  if (!normalized) return false;
+  const digitsOnly = normalized.replace(/^\+/, "");
+  return /^\d{8,15}$/.test(digitsOnly);
+}
 
 export default function RegistrationForm() {
   const [sent, setSent] = useState(false);
@@ -36,6 +47,7 @@ export default function RegistrationForm() {
     consent: false,
     twentyFiveUsers: false,
     dataProcessing: false,
+    _honey: "",
   });
 
   function validateForm(data: FormData): FormErrors {
@@ -59,7 +71,7 @@ export default function RegistrationForm() {
 
     if (!data.phone.trim()) {
       newErrors.phone = "Teléfono es obligatorio";
-    } else if (!PHONE_REGEX.test(data.phone)) {
+    } else if (!isValidPhone(data.phone)) {
       newErrors.phone = "Formato inválido. Ej: +56 9 1234 5678";
     }
 
@@ -108,7 +120,15 @@ export default function RegistrationForm() {
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length > 0) return;
+    if (Object.keys(newErrors).length > 0) {
+      // Focus first invalid field for accessibility
+      const firstErrorKey = Object.keys(newErrors)[0];
+      const firstErrorElement = document.querySelector(`[name="${firstErrorKey}"]`);
+      if (firstErrorElement instanceof HTMLElement) {
+        firstErrorElement.focus();
+      }
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -125,9 +145,17 @@ export default function RegistrationForm() {
       }
 
       setSent(true);
+      // Focus success message for screen readers
+      setTimeout(() => {
+        const successElement = document.querySelector('[role="status"]');
+        if (successElement instanceof HTMLElement) {
+          successElement.focus();
+        }
+      }, 0);
       setFormData({
         name: "", role: "", email: "", phone: "", company: "",
         country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
+        _honey: "",
       });
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "Error desconocido");
@@ -153,6 +181,7 @@ export default function RegistrationForm() {
             setFormData({
               name: "", role: "", email: "", phone: "", company: "",
               country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
+              _honey: "",
             });
           }}
         >
@@ -215,6 +244,7 @@ export default function RegistrationForm() {
           <input
             required
             type="tel"
+            inputMode="tel"
             name="phone"
             autoComplete="tel"
             placeholder="+56 9 1234 5678"

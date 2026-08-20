@@ -13,12 +13,24 @@ const redis = UPSTASH_REDIS_REST_URL && UPSTASH_REDIS_REST_TOKEN
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 10;
+const WEBHOOK_TIMEOUT_MS = 12000;
+
+function normalizePhone(phone: string): string {
+  return phone.replace(/[\s().-]/g, "");
+}
+
+function isValidPhone(phone: string): boolean {
+  const normalized = normalizePhone(phone);
+  if (!normalized) return false;
+  const digitsOnly = normalized.replace(/^\+/, "");
+  return /^\d{8,15}$/.test(digitsOnly);
+}
 
 const FormSchema = z.object({
   name: z.string().min(3, "Nombre muy corto"),
   role: z.string().min(2, "Cargo requerido"),
   email: z.string().email("Correo inválido"),
-  phone: z.string().regex(/^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{4,6}$/, "Teléfono inválido"),
+  phone: z.string().refine(isValidPhone, "Teléfono inválido"),
   company: z.string().min(2, "Empresa requerida"),
   country: z.enum(["Chile", "Perú", "Otro país de LATAM"]),
   companySize: z.enum(["30 a 49 colaboradores", "50 a 99 colaboradores", "100 a 299 colaboradores", "300 o más colaboradores"]),
@@ -102,19 +114,35 @@ export default async function handler(
       return response.status(400).json({ error: firstError.message });
     }
 
-    const webhookResponse = await fetch(POWER_AUTOMATE_WEBHOOK, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(parsed.data),
-    });
+    const webhookController = new AbortController();
+    const webhookTimeout = setTimeout(() => webhookController.abort(), WEBHOOK_TIMEOUT_MS);
 
-    if (!webhookResponse.ok) {
-      const errorText = await webhookResponse.text();
-      console.error("Power Automate error:", webhookResponse.status, errorText);
-      return response.status(502).json({ error: "Error al procesar la postulación" });
+    try {
+      const webhookResponse = await fetch(POWER_AUTOMATE_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+        signal: webhookController.signal,
+      });
+
+      clearTimeout(webhookTimeout);
+
+      if (!webhookResponse.ok) {
+        const errorText = await webhookResponse.text();
+        console.error("Power Automate error:", webhookResponse.status, errorText);
+        return response.status(502).json({ error: "Error al procesar la postulación" });
+      }
+
+      return response.status(200).json({ success: true });
+    } catch (error) {
+      clearTimeout(webhookTimeout);
+      if (error instanceof Error && error.name === "AbortError") {
+        console.error("Power Automate timeout");
+        return response.status(504).json({ error: "No pudimos enviar tu postulación en este momento. Intenta nuevamente en unos minutos." });
+      }
+      console.error("Submit form error:", error);
+      return response.status(500).json({ error: "Error interno del servidor" });
     }
-
-    return response.status(200).json({ success: true });
   } catch (error) {
     console.error("Submit form error:", error);
     return response.status(500).json({ error: "Error interno del servidor" });

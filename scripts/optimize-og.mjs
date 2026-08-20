@@ -29,9 +29,6 @@ async function optimize() {
       .webp({ quality: 80 })
       .toFile(outputWebPPath);
 
-    const optimizedMeta = await sharp(outputPath).metadata();
-    const webpMeta = await sharp(outputWebPPath).metadata();
-
     const originalSize = (await sharp(inputPath).stats()).size;
     const optimizedSize = (await sharp(outputPath).stats()).size;
     const webpSize = (await sharp(outputWebPPath).stats()).size;

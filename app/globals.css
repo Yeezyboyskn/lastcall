@@ -48,13 +48,13 @@ button, input, select { font: inherit; }
   outline: none;
 }
 
-.nav { height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.nav { height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: sticky; top: 0; z-index: 100; background: var(--paper); border-bottom: 1px solid var(--line); }
 .brand img { display: block; width: 190px; height: auto; }
 .navLinks { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 700; }
 .navLinks > a:not(.navCta):hover { color: #667085; }
 .navCta { background: var(--ink); color: white; border-radius: 999px; padding: 13px 20px; }
 
-.hero { position: relative; overflow: hidden; min-height: 680px; background: var(--night); color: white; border-radius: 0 0 42px 42px; }
+.section { padding-block: 118px; scroll-margin-top: 100px; }
 .heroGlow { position: absolute; inset: 0; background: radial-gradient(circle at 78% 40%, rgba(79,107,237,.3), transparent 28%), radial-gradient(circle at 70% 80%, rgba(243,234,53,.12), transparent 32%); }
 .heroGrid { position: relative; display: grid; grid-template-columns: 1.12fr .88fr; min-height: 680px; align-items: center; gap: 80px; }
 .partnerLine { display: flex; align-items: center; gap: 16px; margin-bottom: 34px; }
@@ -172,6 +172,9 @@ h2 em { color:#848d19; font-style:normal; }
 .regSteps { margin-top:50px; display:grid; gap:12px; }
 .regSteps div { display:flex; align-items:center; gap:14px; font-weight:800; }
 .regSteps strong { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--ink); color:white; font-size:12px; }
+.trustSignals { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:20px; padding:16px; background:rgba(16,21,34,0.05); border-radius:8px; }
+.trustItem { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:#323846; }
+.trustIcon { font-size:16px; }
 .formPanel { background:white; box-shadow:18px 18px 0 rgba(16,21,34,.96); }
 .formHeader { display:flex; justify-content:space-between; align-items:center; padding:18px 28px; background:var(--ink); color:white; font-size:11px; font-weight:900; letter-spacing:.14em; }
 .formHeader strong { color:var(--acid); }
