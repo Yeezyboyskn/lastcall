@@ -22,6 +22,8 @@ const PHONE_REGEX = /^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[
 
 export default function RegistrationForm() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -102,14 +104,37 @@ export default function RegistrationForm() {
     }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitError(null);
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
+    if (Object.keys(newErrors).length > 0) return;
+
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Error al enviar la postulación");
+      }
+
       setSent(true);
-      console.log("Formulario válido - datos listos para enviar:", formData);
+      setFormData({
+        name: "", role: "", email: "", phone: "", company: "",
+        country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
+      });
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Error desconocido");
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -284,8 +309,11 @@ export default function RegistrationForm() {
         <span>Autorizo el tratamiento de mis datos personales para fines de esta postulación según la política de privacidad.</span>
         {errors.dataProcessing && <span id="dataProcessing-error" className="errorMsg" role="alert">{errors.dataProcessing}</span>}
       </label>
-      <button className="formSubmit" type="submit">Quiero postular al trial <span>↗</span></button>
-      <p className="formNote">Este formulario es demostrativo: no envía ni almacena datos.</p>
+      {submitError && <div className="errorMsg" role="alert" style={{ gridColumn: "1 / -1", textAlign: "center" }}>{submitError}</div>}
+      <button className="formSubmit" type="submit" disabled={submitting}>
+        {submitting ? "Enviando..." : "Quiero postular al trial <span>↗</span>"}
+      </button>
+      <p className="formNote">Los datos se envían a Last Call vía Microsoft Power Automate.</p>
     </form>
   );
 }
