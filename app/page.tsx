@@ -108,8 +108,8 @@ export default function Home() {
             <p className="eyebrow">Last Call presenta · experiencia guiada</p>
             <h1>Tu equipo, con <span>Copilot</span>.<br />30 días para ir más lejos.</h1>
             <p className="heroLead">
-              Activa sin costo Microsoft 365 Copilot Business para hasta 25 usuarios
-              y transforma el último trimestre en un laboratorio real de productividad
+              Activa Microsoft 365 Copilot Business sin costo para hasta 25 usuarios
+              y convierte el último trimestre en un laboratorio real de productividad
               con acompañamiento experto de Last Call.
             </p>
             <div className="heroActions">
