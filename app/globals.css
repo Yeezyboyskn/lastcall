@@ -55,7 +55,8 @@ button, input, select { font: inherit; }
 .navCta { background: var(--ink); color: white; border-radius: 999px; padding: 13px 20px; }
 
 .section { padding-block: 118px; scroll-margin-top: 100px; }
-.heroGlow { position: absolute; inset: 0; background: radial-gradient(circle at 78% 40%, rgba(79,107,237,.3), transparent 28%), radial-gradient(circle at 70% 80%, rgba(243,234,53,.12), transparent 32%); }
+.hero { position: relative; overflow: hidden; min-height: 680px; background: var(--night); color: white; border-radius: 0 0 42px 42px; }
+.heroGlow { position: absolute; inset: 0; background: radial-gradient(circle at 78% 40%, rgba(79,107,237,.30), transparent 28%), radial-gradient(circle at 70% 80%, rgba(243,234,53,.10), transparent 32%); }
 .heroGrid { position: relative; display: grid; grid-template-columns: 1.12fr .88fr; min-height: 680px; align-items: center; gap: 80px; }
 .partnerLine { display: flex; align-items: center; gap: 16px; margin-bottom: 34px; }
 .partnerLine img { width: 122px; height: auto; }
