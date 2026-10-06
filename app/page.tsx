@@ -78,7 +78,7 @@ export default function Home() {
               <a className="primaryButton" href="#registro">Solicitar mi cupo</a>
               <a className="textLink" href="#programa">Ver cómo funciona</a>
             </div>
-            <p className="microcopy">Martes · 4:00 – 5:00 pm · Sesiones de 1 hora<br />Cupos limitados · Sujeto a elegibilidad y disponibilidad de la oferta CSP</p>
+            <p className="microcopy">Martes · 3:00 – 4:00 pm · Sesiones de 1 hora<br />Cupos limitados · Sujeto a elegibilidad y disponibilidad de la oferta CSP</p>
           </div>
           <div className="heroVisual" aria-label="Programa Copilot en 30 días">
             <div className="orbit orbitOne" />
@@ -149,7 +149,7 @@ export default function Home() {
             <article className="sessionCard" key={session.period}>
               <div className="sessionPeriod">
                 {session.period}
-                <span className="sessionDate">{session.date} · 4:00 – 5:00 pm</span>
+                <span className="sessionDate">{session.date} · 3:00 – 4:00 pm</span>
               </div>
               <div className="sessionContent">
                 <p>{session.tag}</p>
@@ -199,7 +199,7 @@ export default function Home() {
         <div className="shell registrationGrid">
           <div className="registrationIntro">
             <img src="lastcall-logo.png" alt="Last Call" />
-            <p className="eyebrow">Sesiones: 27 de octubre – 17 de noviembre de 2026 · Martes, 4:00 – 5:00 pm</p>
+            <p className="eyebrow">Sesiones: 27 de octubre – 17 de noviembre de 2026 · Martes, 3:00 – 4:00 pm</p>
             <h2>Haz de estos 30 días el punto de partida.</h2>
             <p>Completa el formulario y nuestro equipo validará elegibilidad, perfiles y el caso de uso con mayor impacto para tu organización.</p>
             <div className="regSteps">
@@ -243,7 +243,7 @@ export default function Home() {
             <details><summary>¿La prueba tiene costo?</summary><p>No. La prueba de Microsoft 365 Copilot Business cubre hasta 25 usuarios durante 30 días, sujeta a elegibilidad y disponibilidad de la oferta CSP.</p></details>
             <details><summary>¿Necesitamos tener Microsoft 365?</summary><p>Para la experiencia completa (correo, reuniones, archivos) se requiere un tenant Microsoft 365 compatible. Si no lo tienen, Last Call evalúa la ruta de preparación o migración adecuada.</p></details>
             <details><summary>¿Qué ocurre al finalizar los 30 días?</summary><p>Antes del cierre revisamos resultados y definimos juntos si la organización desea convertir, ajustar o cerrar el piloto. Las condiciones se acuerdan durante el kickoff.</p></details>
-            <details><summary>¿Las fechas y horarios ya están confirmados?</summary><p>Sí. Las cuatro sesiones serán los martes 27 de octubre, 3, 10 y 17 de noviembre de 2026, de 4:00 a 5:00 pm. Cada sesión dura 1 hora.</p></details>
+            <details><summary>¿Las fechas y horarios ya están confirmados?</summary><p>Sí. Las cuatro sesiones serán los martes 27 de octubre, 3, 10 y 17 de noviembre de 2026, de 3:00 a 4:00 pm. Cada sesión dura 1 hora.</p></details>
           </div>
         </div>
       </section>

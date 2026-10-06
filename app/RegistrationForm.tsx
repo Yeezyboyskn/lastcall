@@ -162,12 +162,11 @@ export default function RegistrationForm() {
     return (
       <div className="formSuccess" role="status" aria-live="polite">
         <span aria-hidden="true">✓</span>
-        <p className="eyebrow">Postulación enviada</p>
-        <h3>Tu organización ya dio el primer paso.</h3>
+        <p className="eyebrow">Postulación registrada</p>
+        <h3>¡Postulación registrada con éxito!</h3>
         <p>
-          Nuestro equipo revisará la elegibilidad, validará los perfiles
-          y se pondrá en contacto para coordinar el kickoff del programa:
-          martes 27 de octubre de 2026, de 4:00 a 5:00 pm.
+          Gracias por postular. Pronto Last Call se pondrá en contacto contigo
+          si cumples con todos los requisitos del programa.
         </p>
         <button
           type="button"
@@ -180,7 +179,7 @@ export default function RegistrationForm() {
             });
           }}
         >
-          Nueva postulación
+          Enviar otra postulación
         </button>
       </div>
     );
