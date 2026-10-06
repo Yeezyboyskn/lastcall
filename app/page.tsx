@@ -5,34 +5,34 @@ const sessions = [
   {
     period: "Semana 1",
     date: "Martes 27 de octubre",
-    title: "Fundamentos y puesta en marcha",
-    tag: "Kickoff · Onboarding",
-    copy: "Activamos Copilot en el entorno, alineamos objetivos de negocio y enseñamos a tu equipo a formular prompts efectivos, iterar con confianza y aplicar la IA desde el primer día.",
-    tools: "Copilot Chat · Teams · Outlook",
+    title: "Copilot Chat y Teams",
+    tag: "COPILOT CHAT · TEAMS",
+    copy: "Activamos Copilot en el entorno y enseñamos a tu equipo a formular prompts efectivos en Copilot Chat, y a sacarle provecho en reuniones, chats y canales de Teams desde el primer día.",
+    tools: "Copilot Chat · Teams",
   },
   {
     period: "Semana 2",
     date: "Martes 3 de noviembre",
-    title: "Casos de uso por perfil",
-    tag: "Talleres prácticos",
-    copy: "Sesiones dirigidas por rol —Finanzas, RR.HH., Ventas, Operaciones, TI, Gerencia— para transformar tareas que hoy toman horas en minutos y construir una biblioteca de prompts reutilizables.",
-    tools: "Word · Excel · PowerPoint",
+    title: "Word y Excel",
+    tag: "WORD · EXCEL",
+    copy: "Redactamos, resumimos y damos formato a documentos en Word, y analizamos datos, creamos fórmulas y obtenemos conclusiones en Excel, para convertir tareas que toman horas en minutos.",
+    tools: "Word · Excel",
   },
   {
     period: "Semana 3",
     date: "Martes 10 de noviembre",
-    title: "Medición y adopción real",
-    tag: "Q&A · Métricas",
-    copy: "Resolvemos bloqueos, revisamos telemetría de uso y documentamos evidencias antes/después en los escenarios de mayor impacto para validar el retorno de la inversión.",
-    tools: "Dashboard · Champions · Q&A",
+    title: "Outlook y PowerPoint",
+    tag: "OUTLOOK · POWERPOINT",
+    copy: "Gestionamos la bandeja de entrada y redactamos correos con Outlook, y creamos presentaciones claras y atractivas en PowerPoint a partir de tus propios documentos.",
+    tools: "Outlook · PowerPoint",
   },
   {
     period: "Semana 4",
     date: "Martes 17 de noviembre",
-    title: "Del piloto a la decisión ejecutiva",
-    tag: "Demo Day · Roadmap",
-    copy: "Presentamos resultados cuantificables, aprendizajes clave y una hoja de ruta clara para escalar Copilot con gobernanza, seguridad y presupuesto aprobado.",
-    tools: "KPIs · ROI · Próximos pasos",
+    title: "Agentes de Copilot",
+    tag: "AGENTES",
+    copy: "Conocemos qué son los agentes y cómo automatizar tareas repetitivas con ellos, para llevar el uso de Copilot al siguiente nivel en tu operación.",
+    tools: "Agentes · Automatización",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function Home() {
               <a className="primaryButton" href="#registro">Solicitar mi cupo</a>
               <a className="textLink" href="#programa">Ver cómo funciona</a>
             </div>
-            <p className="microcopy">Martes · 4:00 – 5:00 pm · Sesiones de 1 hora<br />Cupos limitados · Sujeto a elegibilidad y disponibilidad de la oferta CSP</p>
+            <p className="microcopy">Martes · 3:00 – 4:00 pm · Sesiones de 1 hora<br />Cupos limitados · Sujeto a elegibilidad y disponibilidad de la oferta CSP</p>
           </div>
           <div className="heroVisual" aria-label="Programa Copilot en 30 días">
             <div className="orbit orbitOne" />
@@ -149,7 +149,7 @@ export default function Home() {
             <article className="sessionCard" key={session.period}>
               <div className="sessionPeriod">
                 {session.period}
-                <span className="sessionDate">{session.date} · 4:00 – 5:00 pm</span>
+                <span className="sessionDate">{session.date} · 3:00 – 4:00 pm</span>
               </div>
               <div className="sessionContent">
                 <p>{session.tag}</p>
@@ -170,9 +170,9 @@ export default function Home() {
             <p>Más de 34 años convirtiendo tecnología en resultados de negocio, ahora aplicados a una adopción de IA segura, medible y humana.</p>
           </div>
           <div className="differenceList">
-            <div><span>01</span><h3>Adopción por perfiles</h3><p>Casos reales para Finanzas, RR.HH., Ventas, Operaciones, TI y Gerencia.</p></div>
+            <div><span>01</span><h3>Adopción práctica</h3><p>Casos reales con Copilot Chat, Teams, Word, Excel, Outlook, PowerPoint y agentes.</p></div>
             <div><span>02</span><h3>Seguridad desde el inicio</h3><p>Revisión de permisos, preparación del entorno y gobernanza antes de escalar.</p></div>
-            <div><span>03</span><h3>Evidencia para decidir</h3><p>Seguimiento de uso, casos antes/después y cierre ejecutivo con roadmap aprobado.</p></div>
+            <div><span>03</span><h3>Evidencia para decidir</h3><p>Seguimiento de uso, casos antes/después y cierre ejecutivo con próximos pasos definidos.</p></div>
           </div>
         </div>
       </section>
@@ -199,13 +199,13 @@ export default function Home() {
         <div className="shell registrationGrid">
           <div className="registrationIntro">
             <img src="lastcall-logo.png" alt="Last Call" />
-            <p className="eyebrow">Sesiones: 27 de octubre – 17 de noviembre de 2026 · Martes, 4:00 – 5:00 pm</p>
+            <p className="eyebrow">Sesiones: 27 de octubre – 17 de noviembre de 2026 · Martes, 3:00 – 4:00 pm</p>
             <h2>Haz de estos 30 días el punto de partida.</h2>
             <p>Completa el formulario y nuestro equipo validará elegibilidad, perfiles y el caso de uso con mayor impacto para tu organización.</p>
             <div className="regSteps">
               <div><strong>1</strong><span>Postulas a tu empresa</span></div>
               <div><strong>2</strong><span>Validamos el escenario</span></div>
-              <div><strong>3</strong><span>Coordinamos el kickoff</span></div>
+              <div><strong>3</strong><span>Coordinamos el inicio</span></div>
             </div>
           </div>
           <div className="formPanel">
@@ -242,8 +242,8 @@ export default function Home() {
           <div>
             <details><summary>¿La prueba tiene costo?</summary><p>No. La prueba de Microsoft 365 Copilot Business cubre hasta 25 usuarios durante 30 días, sujeta a elegibilidad y disponibilidad de la oferta CSP.</p></details>
             <details><summary>¿Necesitamos tener Microsoft 365?</summary><p>Para la experiencia completa (correo, reuniones, archivos) se requiere un tenant Microsoft 365 compatible. Si no lo tienen, Last Call evalúa la ruta de preparación o migración adecuada.</p></details>
-            <details><summary>¿Qué ocurre al finalizar los 30 días?</summary><p>Antes del cierre revisamos resultados y definimos juntos si la organización desea convertir, ajustar o cerrar el piloto. Las condiciones se acuerdan durante el kickoff.</p></details>
-            <details><summary>¿Las fechas y horarios ya están confirmados?</summary><p>Sí. Las cuatro sesiones serán los martes 27 de octubre, 3, 10 y 17 de noviembre de 2026, de 4:00 a 5:00 pm. Cada sesión dura 1 hora.</p></details>
+            <details><summary>¿Qué ocurre al finalizar los 30 días?</summary><p>Antes del cierre revisamos resultados y definimos juntos si la organización desea convertir, ajustar o cerrar el piloto. Las condiciones se acuerdan al inicio del programa.</p></details>
+            <details><summary>¿Las fechas y horarios ya están confirmados?</summary><p>Sí. Las cuatro sesiones serán los martes 27 de octubre, 3, 10 y 17 de noviembre de 2026, de 3:00 a 4:00 pm. Cada sesión dura 1 hora.</p></details>
           </div>
         </div>
       </section>
