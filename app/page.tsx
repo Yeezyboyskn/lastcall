@@ -170,9 +170,9 @@ export default function Home() {
             <p>Más de 34 años convirtiendo tecnología en resultados de negocio, ahora aplicados a una adopción de IA segura, medible y humana.</p>
           </div>
           <div className="differenceList">
-            <div><span>01</span><h3>Adopción por perfiles</h3><p>Casos reales para Finanzas, RR.HH., Ventas, Operaciones, TI y Gerencia.</p></div>
+            <div><span>01</span><h3>Adopción práctica</h3><p>Casos reales con Copilot Chat, Teams, Word, Excel, Outlook, PowerPoint y agentes.</p></div>
             <div><span>02</span><h3>Seguridad desde el inicio</h3><p>Revisión de permisos, preparación del entorno y gobernanza antes de escalar.</p></div>
-            <div><span>03</span><h3>Evidencia para decidir</h3><p>Seguimiento de uso, casos antes/después y cierre ejecutivo con roadmap aprobado.</p></div>
+            <div><span>03</span><h3>Evidencia para decidir</h3><p>Seguimiento de uso, casos antes/después y cierre ejecutivo con próximos pasos definidos.</p></div>
           </div>
         </div>
       </section>
@@ -205,7 +205,7 @@ export default function Home() {
             <div className="regSteps">
               <div><strong>1</strong><span>Postulas a tu empresa</span></div>
               <div><strong>2</strong><span>Validamos el escenario</span></div>
-              <div><strong>3</strong><span>Coordinamos el kickoff</span></div>
+              <div><strong>3</strong><span>Coordinamos el inicio</span></div>
             </div>
           </div>
           <div className="formPanel">
@@ -242,7 +242,7 @@ export default function Home() {
           <div>
             <details><summary>¿La prueba tiene costo?</summary><p>No. La prueba de Microsoft 365 Copilot Business cubre hasta 25 usuarios durante 30 días, sujeta a elegibilidad y disponibilidad de la oferta CSP.</p></details>
             <details><summary>¿Necesitamos tener Microsoft 365?</summary><p>Para la experiencia completa (correo, reuniones, archivos) se requiere un tenant Microsoft 365 compatible. Si no lo tienen, Last Call evalúa la ruta de preparación o migración adecuada.</p></details>
-            <details><summary>¿Qué ocurre al finalizar los 30 días?</summary><p>Antes del cierre revisamos resultados y definimos juntos si la organización desea convertir, ajustar o cerrar el piloto. Las condiciones se acuerdan durante el kickoff.</p></details>
+            <details><summary>¿Qué ocurre al finalizar los 30 días?</summary><p>Antes del cierre revisamos resultados y definimos juntos si la organización desea convertir, ajustar o cerrar el piloto. Las condiciones se acuerdan al inicio del programa.</p></details>
             <details><summary>¿Las fechas y horarios ya están confirmados?</summary><p>Sí. Las cuatro sesiones serán los martes 27 de octubre, 3, 10 y 17 de noviembre de 2026, de 3:00 a 4:00 pm. Cada sesión dura 1 hora.</p></details>
           </div>
         </div>
