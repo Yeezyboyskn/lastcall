@@ -35,7 +35,7 @@ const FormSchema = z.object({
   companySize: z.enum(["30 a 49 colaboradores", "50 a 99 colaboradores", "100 a 299 colaboradores", "300 o más colaboradores"]),
   consent: z.boolean().refine((v) => v === true, "Debes autorizar el contacto"),
   twentyFiveUsers: z.boolean().refine((v) => v === true, "Confirma participación de usuarios"),
-  dataProcessing: z.boolean().refine((v) => v === true, "Debes autorizar tratamiento de datos"),
+  dataProcessing: z.boolean().refine((v) => v === true, "Debes autorizar el envío de información a los usuarios del programa"),
   _honey: z.string().optional(),
 });
 

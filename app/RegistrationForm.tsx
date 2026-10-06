@@ -90,7 +90,7 @@ export default function RegistrationForm() {
     }
 
     if (!data.dataProcessing) {
-      newErrors.dataProcessing = "Debes autorizar el tratamiento de datos personales";
+      newErrors.dataProcessing = "Debes autorizar el envío de información a los usuarios del programa";
     }
 
     return newErrors;
@@ -319,13 +319,7 @@ export default function RegistrationForm() {
           aria-invalid={!!errors.dataProcessing}
           aria-describedby={errors.dataProcessing ? "dataProcessing-error" : undefined}
         />
-        <span>
-          Autorizo el tratamiento de mis datos personales según la{' '}
-          <a href="https://www.lastcall.cl/_files/ugd/9ba05e_412c82245ad84ae6927d7b2256c1071d.pdf" target="_blank" rel="noopener noreferrer" className="privacyLink">
-            política de privacidad
-          </a>{' '}
-          de Last Call.
-        </span>
+        <span>Autorizo a Last Call a enviar información a los usuarios que participen del programa.</span>
         {errors.dataProcessing && <span id="dataProcessing-error" className="errorMsg" role="alert">{errors.dataProcessing}</span>}
       </label>
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
