@@ -32,7 +32,6 @@ const FormSchema = z.object({
   email: z.string().email("Correo inválido"),
   phone: z.string().refine(isValidPhone, "Teléfono inválido"),
   company: z.string().min(2, "Empresa requerida"),
-  country: z.enum(["Chile", "Perú", "Otro país de LATAM"]),
   companySize: z.enum(["30 a 49 colaboradores", "50 a 99 colaboradores", "100 a 299 colaboradores", "300 o más colaboradores"]),
   consent: z.boolean().refine((v) => v === true, "Debes autorizar el contacto"),
   twentyFiveUsers: z.boolean().refine((v) => v === true, "Confirma participación de usuarios"),

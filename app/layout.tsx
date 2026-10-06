@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const baseUrl = `${protocol}://${host}`;
   const title = "Copilot en 30 días | Last Call + Microsoft";
-  const description = "Prueba Microsoft 365 Copilot Business durante 30 días con cuatro sesiones y acompañamiento experto de Last Call.";
+  const description = "Prueba Microsoft 365 Copilot Business durante 30 días con Last Call. Sesiones: martes 27 de octubre, 3, 10 y 17 de noviembre de 2026, de 4:00 a 5:00 pm.";
 
   return {
     title,

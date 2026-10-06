@@ -8,7 +8,6 @@ type FormData = {
   email: string;
   phone: string;
   company: string;
-  country: string;
   companySize: string;
   consent: boolean;
   twentyFiveUsers: boolean;
@@ -42,7 +41,6 @@ export default function RegistrationForm() {
     email: "",
     phone: "",
     company: "",
-    country: "",
     companySize: "",
     consent: false,
     twentyFiveUsers: false,
@@ -72,15 +70,11 @@ export default function RegistrationForm() {
     if (!data.phone.trim()) {
       newErrors.phone = "Teléfono es obligatorio";
     } else if (!isValidPhone(data.phone)) {
-      newErrors.phone = "Formato inválido. Ej: +56 9 1234 5678";
+      newErrors.phone = "Ingresa un teléfono de 8 a 15 dígitos, con prefijo internacional opcional";
     }
 
     if (!data.company.trim()) {
       newErrors.company = "Nombre de la empresa es obligatorio";
-    }
-
-    if (!data.country) {
-      newErrors.country = "Selecciona un país";
     }
 
     if (!data.companySize) {
@@ -154,7 +148,7 @@ export default function RegistrationForm() {
       }, 0);
       setFormData({
         name: "", role: "", email: "", phone: "", company: "",
-        country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
+        companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
         _honey: "",
       });
     } catch (error) {
@@ -172,7 +166,8 @@ export default function RegistrationForm() {
         <h3>Tu organización ya dio el primer paso.</h3>
         <p>
           Nuestro equipo revisará la elegibilidad, validará los perfiles
-          y se pondrá en contacto para coordinar el kickoff del programa.
+          y se pondrá en contacto para coordinar el kickoff del programa:
+          martes 27 de octubre de 2026, de 4:00 a 5:00 pm.
         </p>
         <button
           type="button"
@@ -180,7 +175,7 @@ export default function RegistrationForm() {
             setSent(false);
             setFormData({
               name: "", role: "", email: "", phone: "", company: "",
-              country: "", companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
+              companySize: "", consent: false, twentyFiveUsers: false, dataProcessing: false,
               _honey: "",
             });
           }}
@@ -247,7 +242,7 @@ export default function RegistrationForm() {
             inputMode="tel"
             name="phone"
             autoComplete="tel"
-            placeholder="+56 9 1234 5678"
+            placeholder="Teléfono de contacto"
             value={formData.phone}
             onChange={handleChange}
             aria-invalid={!!errors.phone}
@@ -256,8 +251,7 @@ export default function RegistrationForm() {
           {errors.phone && <span id="phone-error" className="errorMsg" role="alert">{errors.phone}</span>}
         </label>
       </div>
-      <div className="formRow">
-        <label>
+      <label>
           Empresa
           <input
             required
@@ -270,26 +264,7 @@ export default function RegistrationForm() {
             aria-describedby={errors.company ? "company-error" : undefined}
           />
           {errors.company && <span id="company-error" className="errorMsg" role="alert">{errors.company}</span>}
-        </label>
-        <label>
-          País
-          <select
-            required
-            name="country"
-            defaultValue=""
-            value={formData.country}
-            onChange={handleChange}
-            aria-invalid={!!errors.country}
-            aria-describedby={errors.country ? "country-error" : undefined}
-          >
-            <option value="" disabled>Selecciona</option>
-            <option>Chile</option>
-            <option>Perú</option>
-            <option>Otro país de LATAM</option>
-          </select>
-          {errors.country && <span id="country-error" className="errorMsg" role="alert">{errors.country}</span>}
-        </label>
-      </div>
+      </label>
       <label>
         Tamaño de la organización
         <select

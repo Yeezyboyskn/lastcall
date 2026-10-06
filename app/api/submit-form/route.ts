@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
     const requiredFields = [
       "name", "role", "email", "phone", "company",
-      "country", "companySize", "consent", "twentyFiveUsers", "dataProcessing"
+      "companySize", "consent", "twentyFiveUsers", "dataProcessing"
     ];
 
     for (const field of requiredFields) {
