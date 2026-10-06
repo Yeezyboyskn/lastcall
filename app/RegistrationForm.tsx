@@ -163,7 +163,7 @@ export default function RegistrationForm() {
       <div className="formSuccess" role="status" aria-live="polite">
         <span aria-hidden="true">✓</span>
         <p className="eyebrow">Postulación registrada</p>
-        <h3>¡Postulación registrada con éxito!</h3>
+        <h3 style={{ overflowWrap: "anywhere" }}>¡Postulación registrada correctamente!</h3>
         <p>
           Gracias por postular. Pronto Last Call se pondrá en contacto contigo
           si cumples con todos los requisitos del programa.
